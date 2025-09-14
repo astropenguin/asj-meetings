@@ -1,6 +1,7 @@
-__all__ = ["get_sessions", "sessions"]
+__all__ = ["db", "sessions"]
 __version__ = "0.1.0"
 
 
 # dependencies
-from .sessions import *
+from . import db
+from . import sessions

@@ -1,4 +1,4 @@
-__all__ = ["get_sessions"]
+__all__ = ["get"]
 
 
 # standard library
@@ -39,7 +39,7 @@ URL_ARCHIVE = "https://www.asj.or.jp/nenkai/archive"
 URL_SESSION = re.compile(r"session-([A-Z]+[0-9]*)\.html")
 
 
-def get_sessions(
+def get(
     begin_year: int = 1996,
     end_year: int = 2025,
     /,
@@ -66,7 +66,7 @@ def get_sessions(
         disable=not progress,
     ):
         try:
-            dfs.append(get_sessions_each(year, season, timeout=timeout))
+            dfs.append(get_each(year, season, timeout=timeout))
         except httpx.HTTPError as error:
             LOGGER.warning(f"Failed to get session: {year=}, {season=}")
             continue
@@ -74,7 +74,7 @@ def get_sessions(
     return pd.concat(dfs)
 
 
-def get_sessions_each(
+def get_each(
     year: int,
     season: str,
     /,
